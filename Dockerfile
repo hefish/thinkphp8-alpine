@@ -1,14 +1,14 @@
-FROM alpine:3.19
+FROM alpine:3.23
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories  &&  \
     apk update  && \
-    apk add nginx php82-fpm  composer php82-pdo_mysql php82-opcache && \
+    apk add nginx php83-fpm  composer php83-pdo_mysql php83-opcache php83-ctype && \
     mkdir -p /var/www/html/public 
 
 
 ADD config/nginx.conf  /etc/nginx/nginx.conf
 ADD config/default.conf /etc/nginx/http.d/default.conf
-ADD config/php.conf.d/99_php.ini /etc/php82/conf.d/99_php.ini
+ADD config/php.conf.d/99_php.ini /etc/php83/conf.d/99_php.ini
 ADD entry_point.sh  /entry_point.sh
 ADD index.php  /var/www/html/public/index.php
 
